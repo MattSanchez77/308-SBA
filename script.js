@@ -85,8 +85,68 @@ const CourseInfo = {
 
       const result = [];
 
+      const learnerScores = {};
+      let currDate = new Date();
+
+      for (let i = 0; i < LearnerSubmissions.length; i++) {
+        let submission = LearnerSubmissions[i];
+        let assignment;
       
+      for (let n = 0; n < assignmentGroup.assignments.length; n++) {
+        let assignmentData = assignmentGroup.assignments[n];
+        if (assignmentData.id === submission.assignment_id){
+          assignment = assignmentData;
+          break;
+        }
+      }
+      
+    if (assignment) {
+      let dueDate = new Date(assignment.due_at);
+      if (dueDate < currDate) {
+        if (!learnerScores[submission.learner_id]) {
+          learnerScores[submission.learner_id] = {};
+        }
+        if (!learnerScores[submission.learner_id].scores) {
+          learnerScores[submission.learner_id].scores = [];
+        }
+        let score = submission.submission.score;
+        let submitDate = new Date(submission.submission.submitted_at);
+      }
+
+      learnerScores[submission.learner_id].scores.push({
+        assignment_id: submission.assignment_id,
+        score: score,
+        points_possible: assignment.points_possible,
+    });
     }
+    }
+    }
+
+    for (let learner in learnerScores) {
+      let learnerData = learnerScores[learner];
+      let totalScore = 0;
+      let totalPossibleScore = 0
+      let assignmentScoresonj = {};
+
+      for (let m = 0; m <learnerData.scores.length; m++) {
+        let score = learnerData.scores[m];
+
+        if(typeof score.score !== "number") {
+          console.log('Score cannot be negative!');
+          return;
+        }
+        if ( typeofscore.points_possible !== "number" ||
+          score.points_possible === 0
+        ){
+          console.log('Number cannot be negative!');
+          return;
+        }
+
+        totalScore += score.score;
+        totalPossibleScore += score.points_possible;
+      }
+    }
+    
 
     // here, we would process this data to achieve the desired result.
     // const result = [
