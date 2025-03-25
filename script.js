@@ -76,13 +76,8 @@ const CourseInfo = {
     }
   ];
   
-  function getLearnerData(course, assignmentGroup, submissions) {
-    try {
-      if (course.id !== assignmentGroup.course_id) {
-        console.log("course id and assignment group id must match");
-        return [];
-      }
-
+  function getLearnerData(course, assignmentGroup, submissions) {}
+    
       const result = [];
 
       const learnerScores = {};
@@ -120,7 +115,7 @@ const CourseInfo = {
     });
     }
     }
-    }
+  
 
     for (let learner in learnerScores) {
       let learnerData = learnerScores[learner];
@@ -151,9 +146,23 @@ const CourseInfo = {
           id: Number(learner),
           average: Number(averageScores * 100),
           ...assignmentScoresobj
-        })
+        });
       }
-    }
+
+      return result;
+
+      // try/catch gave an error
+
+    // } try {
+    //   if (course.id !== assignmentGroup.course_id) {
+    //     console.log("course id and assignment group id must match");
+    //     return [];
+    //   }catch (error) {
+    //   console.log(error);
+
+    //   return [];}
+}
+ 
 
 
     // here, we would process this data to achieve the desired result.
@@ -173,7 +182,7 @@ const CourseInfo = {
     // ];
   
     // return result;
-  }
+  
   
 //   const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
   
