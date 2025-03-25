@@ -76,7 +76,18 @@ const CourseInfo = {
     }
   ];
   
-  function getLearnerData(course, ag, submissions) {
+  function getLearnerData(course, assignmentGroup, submissions) {
+    try {
+      if (course.id !== assignmentGroup.course_id) {
+        console.log("course id and assignment group id must match");
+        return [];
+      }
+
+      const result = [];
+
+      
+    }
+
     // here, we would process this data to achieve the desired result.
     // const result = [
     //   {
@@ -93,10 +104,10 @@ const CourseInfo = {
     //   }
     // ];
   
-    return result;
+    // return result;
   }
   
-  const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+//   const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
   
-  console.log(result);
+//   console.log(result);
   
