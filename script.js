@@ -141,12 +141,20 @@ const CourseInfo = {
           console.log('Number cannot be negative!');
           return;
         }
-
-        totalScore += score.score;
-        totalPossibleScore += score.points_possible;
+        let averageScores = 0;
+        if (totalPossibleScore > 0) {
+          averageScores = totalScore / totalPossibleScore;
+        } else {
+          averageScores = 0
+        }
+        result.push({
+          id: Number(learner),
+          average: Number(averageScores * 100),
+          ...assignmentScoresobj
+        })
       }
     }
-    
+
 
     // here, we would process this data to achieve the desired result.
     // const result = [
